@@ -1,0 +1,22 @@
+import React from 'react'
+import UserListItem from './UserListItem'
+
+const UserList = (props) => {
+    /* const { users } = props  */   // rasturanje objekta 
+
+
+    const userItems = props.users.map(user => {
+        return <UserListItem user={user} />
+    })
+
+    return (
+        <ul>
+            {userItems}
+        </ul>
+    )
+
+}
+
+export default UserList
+
+
