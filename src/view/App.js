@@ -4,6 +4,11 @@ import Header from './components/Header.js'
 import UsersPage from './Users/UsersPage.js'
 import Footer from './components/Footer.js'
 import './App.css';
+import Main from './view/components/Main'
+
+
+
+
 
 
 const App = (props) => {

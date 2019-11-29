@@ -1,34 +1,15 @@
-/* import React from 'react'
-import postsArray from './posts'
-
-
+import React from 'react'
+import UsersPage from '../Users/UsersPage'
 
 class Main extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            posts: [],
-        }
-
-        setTimeout(() => {
-            this.setState({
-                posts: postsArray
-            })
-        }, 5000)
-    }
-
-    render() {
+    render () {
         return (
-            <main className='main'>
-                {this.state.posts.map(post => <div><h2>{post.id}</h2><p>{post.title}</p></div>)}
-
+            <main>
+                <UsersPage isGrid={this.props.isGrid}/>
             </main>
         )
     }
 }
-
-
-export default Main */
-
-
