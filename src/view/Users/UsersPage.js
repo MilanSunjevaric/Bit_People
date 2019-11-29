@@ -1,9 +1,6 @@
 import React from 'react'
 import UserList from './UserList'
 import { fetchUser } from '../../services/UserService'
-import Button from '../components/Button';
-
-
 
 
 class UsersPage extends React.Component {
@@ -13,6 +10,7 @@ class UsersPage extends React.Component {
         this.state = {
             users: [],
         }
+
     }
 
     /* componentDidMount() {
@@ -24,22 +22,22 @@ class UsersPage extends React.Component {
             })
     } */
 
-    starter(event) {
+    starter(event) {                                 /* funkciju starter pozivamo na klik button-a  */
 
-        fetchUser(event)
-            .then(korisnici => {
+        fetchUser(event)                              /* pozivamo fetchUser()  */
+            .then(korisnici => {                     /* pozivamo then metodu od promisa koji nam vraca fetchUser funkcija iz UserService */
 
-                this.setState({ users: korisnici })
+                this.setState({ users: korisnici })   /* update-ujemo state gde mi u niz(users) stavljamo  objkete koje smo dobili od fetchUser funkcije koja ih je dobila u UserService.js */
             })
     }
 
     render() {
         return (
             <div>
-                <h2>
+                <p>
                     <button onClick={() => this.starter()}>Start</button>
-                    <UserList users={this.state.users} />
-                </h2>
+                    <UserList users={this.state.users} />{/* pozivamo komponentu userList i prosledjujemo joj niz Users iz this.state,  */}
+                </p>
             </div>
         )
     }

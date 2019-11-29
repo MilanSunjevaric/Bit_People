@@ -4,10 +4,18 @@ class User {
     constructor(userData) {
         this.id = userData.login.uuid
         this.name = `${userData.name.first} ${userData.name.last}`
-        this.dob = userData.dob.date
-        this.email = userData.email
+        this.dob = new Date(userData.dob.date).toLocaleString().split(',')[0]
+        this.email = userData.email   /* getMail metoda */
         this.image = userData.picture.medium
 
+    }
+
+    getHiddenEmail() {
+        const mail = this.email.split('@')
+        const first = mail[0].charAt(0)
+        const last = mail[0].charAt(mail[0].length - 1)
+
+        return `${first}...${last}${mail[1]}`
     }
 }
 
