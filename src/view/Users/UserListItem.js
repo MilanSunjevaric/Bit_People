@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserListItem = (props) => {                           /* kartica sa slikom i podacima */
+const UserListItem = (props) => {                         /* kartica sa slikom i podacima */
     return (
         // <li class="collection-item avatar">
 

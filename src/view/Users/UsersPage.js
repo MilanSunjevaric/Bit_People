@@ -11,7 +11,8 @@ class UsersPage extends React.Component {
         this.state = {
             users: [],
             isGrid: false,
-            buttonStyle: false
+            buttonStyle: false,
+            query: ''
         }
     }
 
@@ -44,20 +45,40 @@ class UsersPage extends React.Component {
         })
     }
 
+    handleInputChange = () => {
+        this.setState({
+            query: this.search.value
+        })
+    }
+
     render() {
-        const component = this.state.isGrid
-            ? <GridDiv users={this.state.users} />
-            : <UserList users={this.state.users} />;
 
         const buttonName = this.state.buttonStyle
             ? 'view_module'
             : 'view_list'
+
+        const filteredUsers = this.state.users.filter(user => user
+            .name.toLowerCase()
+            .includes(this.state.query.toLowerCase()))
+
+        const component = this.state.isGrid
+            ? <GridDiv users={filteredUsers} />
+            : <UserList users={filteredUsers} />;
 
 
         return (
             <div >
                 <div className="row">
                     <ul className="right hide-on-med-and-down">
+                        <form>
+                            <input
+                                placeholder="Search for..."
+                                ref={input => this.search = input}
+                                onChange={this.handleInputChange}
+                            />
+                            <p>{this.state.query}</p>
+                        </form>
+
                         <li><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
                         <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
                     </ul>

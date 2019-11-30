@@ -6,10 +6,9 @@ const UserList = (props) => {
     const userItems = props.users.map(user => {           /* mapiramo niz(objekata, sto smo videli iz console.log-a) iz kog svaki objekat prosledjujemo userListItem-u i pozivamo isti.  */
         return <UserListItem user={user} />
     })
-    return (
-        <ul>
-            {userItems}
-        </ul>
+    return (<ul>
+        {userItems}
+    </ul>
 
     )
 

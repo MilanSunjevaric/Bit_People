@@ -4,7 +4,7 @@ import Header from './components/Header.js'
 import UsersPage from './Users/UsersPage.js'
 import Footer from './components/Footer.js'
 import './App.css';
-import Main from './components/Main.js'
+import Main from './components/main.js'
 
 
 class App extends React.Component {
