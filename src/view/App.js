@@ -5,6 +5,7 @@ import UsersPage from './Users/UsersPage.js'
 import Footer from './components/Footer.js'
 import './App.css';
 import Main from './components/main.js'
+import Loader from './components/Loader.js'
 
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
     return (
       <div>
         <Header title='My React Blog' />
+
         <Main />
         <Footer />
       </div>

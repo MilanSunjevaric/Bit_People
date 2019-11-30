@@ -7,6 +7,7 @@ class User {
         this.dob = new Date(userData.dob.date).toLocaleString().split(',')[0]
         this.email = userData.email   /* getMail metoda */
         this.image = userData.picture.large
+        this.gender = userData.gender
     }
 
     getHiddenEmail() {

@@ -2,6 +2,7 @@ import React from 'react'
 import UserList from './UserList'
 import { fetchUser } from '../../services/UserService'
 import GridDiv from './GridDiv'
+import Loader from '../components/Loader.js';
 
 
 class UsersPage extends React.Component {
@@ -12,7 +13,8 @@ class UsersPage extends React.Component {
             users: [],
             isGrid: false,
             buttonStyle: false,
-            query: ''
+            query: '',
+            loading: true
         }
     }
 
@@ -21,10 +23,10 @@ class UsersPage extends React.Component {
     }
 
     loadPageData = () => {
+        this.setState({ loading: true })
         fetchUser()
             .then(korisnici => {
-
-                this.setState({ users: korisnici })
+                this.setState({ users: korisnici, loading: false })
             })
     }
 
@@ -52,6 +54,8 @@ class UsersPage extends React.Component {
     }
 
     render() {
+        if (this.state.loading === true)
+            return <Loader />
 
         const buttonName = this.state.buttonStyle
             ? 'view_module'
