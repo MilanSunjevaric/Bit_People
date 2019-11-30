@@ -44,7 +44,7 @@ class UsersPage extends React.Component {
                 <div className="row">
                     <ul className="right hide-on-med-and-down">
                         <li><a><i className="material-icons" onClick={() => this.changeLayout()}>view_module</i></a></li>
-                        {/* <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li> */}
+                        <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
                     </ul>
                 </div>
 
