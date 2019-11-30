@@ -10,7 +10,8 @@ class UsersPage extends React.Component {
 
         this.state = {
             users: [],
-            isGrid: false
+            isGrid: false,
+            buttonStyle: false
         }
     }
 
@@ -27,9 +28,18 @@ class UsersPage extends React.Component {
     }
 
     changeLayout = () => {
+        this.buttonStyle()
         this.setState(preState => {
             return {
                 isGrid: !preState.isGrid
+            }
+        })
+    }
+
+    buttonStyle = () => {
+        this.setState(preState => {
+            return {
+                buttonStyle: !preState.buttonStyle
             }
         })
     }
@@ -39,11 +49,16 @@ class UsersPage extends React.Component {
             ? <GridDiv users={this.state.users} />
             : <UserList users={this.state.users} />;
 
+        const buttonName = this.state.buttonStyle
+            ? 'view_module'
+            : 'view_list'
+
+
         return (
             <div >
                 <div className="row">
                     <ul className="right hide-on-med-and-down">
-                        <li><a><i className="material-icons" onClick={() => this.changeLayout()}>view_module</i></a></li>
+                        <li><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
                         <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
                     </ul>
                 </div>
