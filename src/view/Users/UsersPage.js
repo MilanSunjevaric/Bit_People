@@ -10,13 +10,15 @@ class UsersPage extends React.Component {
 
         this.state = {
             users: [],
-            isGrid: true
+            isGrid: false
         }
-
     }
 
     componentDidMount() {
+        this.loadPageData();
+    }
 
+    loadPageData = () => {
         fetchUser()
             .then(korisnici => {
 
@@ -24,36 +26,31 @@ class UsersPage extends React.Component {
             })
     }
 
-
-
-
-//starter(event) {                                 /* funkciju starter pozivamo na klik button-a  */
-
-   //  fetchUser(event)                              /* pozivamo fetchUser()  */
-//.then(korisnici => {                     /* pozivamo then metodu od promisa koji nam vraca fetchUser funkcija iz UserService */
-
-    // this.setState({ isGrid: korisnici })       /* update-ujemo state gde mi u niz(users) stavljamo  objkete koje smo dobili od fetchUser funkcije koja ih je dobila u UserService.js*/
-    // })
-    // }
+    changeLayout = () => {
+        this.setState(preState => {
+            return {
+                isGrid: !preState.isGrid
+            }
+        })
+    }
 
     render() {
-
-        if (this.state.isGrid) {
-            return (
-                <div>
-                    <GridDiv users={this.state.users} />
-                </div>
-            )
-        }
+        const component = this.state.isGrid
+            ? <GridDiv users={this.state.users} />
+            : <UserList users={this.state.users} />;
 
         return (
-            <div>
-                <p>
-                    {/* <button onClick={() => this.starter()}>Start</button> */}
-                    <UserList users={this.state.users} />{/* pozivamo komponentu userList i prosledjujemo joj niz Users iz this.state,  */}
-                </p>
+            <div >
+                <div className="row">
+                    <ul className="right hide-on-med-and-down">
+                        <li><a><i className="material-icons" onClick={() => this.changeLayout()}>view_module</i></a></li>
+                        {/* <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li> */}
+                    </ul>
+                </div>
+
+                {component}
             </div>
-        )
+        );
     }
 }
 

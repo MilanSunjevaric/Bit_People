@@ -16,17 +16,10 @@ const Grid = (props) => {                           /* kartica sa slikom i podac
             </div>
         </div>
 
-        //     <div>
-        //         <div>
-        //             <img src={props.user.image} alt="slika" className="gridimg" />
-        //         </div>
-        //         <div>
-        //             <span>Name: {props.user.name}</span>
-        //             <br />
-        //             <span>Email: {props.user.getHiddenEmail()}</span>
-    )   //         </div>
-    //     </div>
-    // )
+
+    )
+
+
 
 }
 export default Grid
