@@ -2,7 +2,8 @@ import React from 'react'
 import UserList from './UserList'
 import { fetchUser } from '../../services/UserService'
 import GridDiv from './GridDiv'
-import Loader from '../components/Loader.js';
+import Loader from '../components/Loader.js'
+import SearchError from "../components/SearchError.js"
 
 
 class UsersPage extends React.Component {
@@ -53,7 +54,10 @@ class UsersPage extends React.Component {
         })
     }
 
+
+
     render() {
+
         if (this.state.loading === true)
             return <Loader />
 
@@ -65,9 +69,16 @@ class UsersPage extends React.Component {
             .name.toLowerCase()
             .includes(this.state.query.toLowerCase()))
 
+
+
         const component = this.state.isGrid
             ? <GridDiv users={filteredUsers} />
             : <UserList users={filteredUsers} />;
+
+
+        const searchError = filteredUsers.length === 0
+            ? <SearchError />
+            : component
 
 
         return (
@@ -87,7 +98,7 @@ class UsersPage extends React.Component {
                         <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
                     </ul>
                 </div>
-
+                {searchError}
                 {component}
             </div>
         );
