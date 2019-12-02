@@ -94,6 +94,11 @@ class UsersPage extends React.Component {
             ? <SearchError />
             : component
 
+        const female=filteredUsers.filter(korisnik=>korisnik.gender==="female").length
+        const male=filteredUsers.filter(korisnik=>korisnik.gender==="male").length
+
+
+
 
         return (
             <div >
@@ -110,6 +115,7 @@ class UsersPage extends React.Component {
                         <li><a onClick={() => this.aboutPage()}> About</a></li>
                         <li><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
                         <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
+                        <li> {`Male:${male} Female: ${female}`}</li>
                     </ul>
                 </div>
                 {searchError}
