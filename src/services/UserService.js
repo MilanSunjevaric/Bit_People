@@ -1,20 +1,29 @@
 import User from '../model/User.js'
+import ReactTimeAgo from 'react-time-ago'
+import { longStackSupport, invoke } from 'q'
+
+
+const emptyUsersCache = () => {
+    localStorage.removeItem("apiUsers")
+}
 
 const fetchUser = () => {
-    const url = 'https://randomuser.me/api/?results=15'
+    const cachedApiUsers = JSON.parse(localStorage.getItem("apiUsers"))
 
+    if (cachedApiUsers && cachedApiUsers.length) {
+        return Promise.resolve(cachedApiUsers.map(apiUser => new User(apiUser)))
+    }
 
-    return fetch(url)
-        .then(res => res.json())             /* response koji je (text) prebacujemo preko json metode u objekat */
+    return fetch('https://randomuser.me/api/?results=15')
+        .then(res => res.json())
         .then(data => {
-
-            const MyUsers = data.results.map(userData => {              /* pristupamo objektu koji smo dobili preko json metode, i pristupamo objektu i property-ju results koji je niz (objekata) i mapiramo ga. */
-                return new User(userData)                             /* pravimo novi objekat User koji prima mapirane objekte kao svoju vrednost */
-            })                               /* data - objekat (response sa APIja) , results - property od data objekta */
-            return MyUsers                      /* MyUsers je niz User objekata */
+            localStorage.setItem("apiUsers", JSON.stringify(data.results))
+            localStorage.setItem("time", JSON.stringify(new Date().getTime()))
+            return data.results.map(apiUser => new User(apiUser))
         })
+
 
 }
 
-export { fetchUser }                         /* exportujemo funkciju fetchUser kao objekat koji koristimo u UserPage */
+export { fetchUser, emptyUsersCache }
 

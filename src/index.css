@@ -156,3 +156,11 @@ li{
             transform: scale(1);
   }
 }
+
+li{
+  border: none;
+}
+a{
+  margin: 0;
+  padding: 10px;
+}

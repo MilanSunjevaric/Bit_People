@@ -55,3 +55,21 @@ p{
 .error-wrapper{
   height: 500px;
 }
+
+input:not([type]){
+  width: 50%;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+.inputdiv{
+  text-align: center;
+}
+.cont>.row>.info>.niz{
+float: left;
+margin: 0;
+}
+ul:not(.browser-default)>.pol{
+  float: right;
+  margin-right: 2em;
+}

@@ -1,10 +1,12 @@
 import React from 'react'
 import UserList from './UserList'
-import { fetchUser } from '../../services/UserService'
+import { fetchUser, fetchCachedUsers, emptyUsersCache } from '../../services/UserService'
 import GridDiv from './GridDiv'
 import Loader from '../components/Loader.js'
 import SearchError from "../components/SearchError.js"
 import About from '../components/About.js'
+import User from '../../model/User.js'
+
 
 
 class UsersPage extends React.Component {
@@ -23,6 +25,14 @@ class UsersPage extends React.Component {
     }
 
     componentDidMount() {
+
+        if (localStorage.getItem("isGrid")) {
+            let isGrid = JSON.parse(localStorage.getItem("isGrid"))
+            this.setState({
+                isGrid: isGrid
+            })
+        }
+
         this.loadPageData();
     }
 
@@ -32,6 +42,11 @@ class UsersPage extends React.Component {
             .then(korisnici => {
                 this.setState({ users: korisnici, loading: false })
             })
+    }
+
+    onReload = () => {
+        emptyUsersCache();
+        this.loadPageData();
     }
 
     changeLayout = () => {
@@ -66,7 +81,6 @@ class UsersPage extends React.Component {
 
 
 
-
     render() {
 
         if (this.state.loading === true)
@@ -94,28 +108,34 @@ class UsersPage extends React.Component {
             ? <SearchError />
             : component
 
-        const female=filteredUsers.filter(korisnik=>korisnik.gender==="female").length
-        const male=filteredUsers.filter(korisnik=>korisnik.gender==="male").length
+        const female = filteredUsers.filter(korisnik => korisnik.gender === "female").length
+        const male = filteredUsers.filter(korisnik => korisnik.gender === "male").length
 
 
 
 
         return (
-            <div >
+            <div className="cont">
                 <div className="row">
-                    <ul className="right hide-on-med-and-down">
-                        <form>
-                            <input
+                    <div className="info">
+                        <li className="niz"><a onClick={() => this.aboutPage()}> About</a></li>
+                        <li className="niz"><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
+                        <li className="niz"><a ><i className="material-icons" onClick={() => this.onReload()}>refresh</i></a></li>
+                    </div>
+                    <ul className=" hide-on-med-and-down lista">
+                        <form className="forma">
+                            <div className="inputdiv"><input
                                 placeholder="Search for..."
                                 ref={input => this.search = input}
                                 onChange={this.handleInputChange}
                             />
-                            <p>{this.state.query}</p>
+                                <p>{this.state.query}</p>
+                            </div>
                         </form>
-                        <li><a onClick={() => this.aboutPage()}> About</a></li>
-                        <li><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
-                        <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
-                        <li> {`Male:${male} Female: ${female}`}</li>
+
+
+                        <li className="pol"> {`Male:${male} Female: ${female}`}</li>
+
                     </ul>
                 </div>
                 {searchError}
