@@ -4,6 +4,7 @@ import { fetchUser } from '../../services/UserService'
 import GridDiv from './GridDiv'
 import Loader from '../components/Loader.js'
 import SearchError from "../components/SearchError.js"
+import About from '../components/About.js'
 
 
 class UsersPage extends React.Component {
@@ -15,7 +16,9 @@ class UsersPage extends React.Component {
             isGrid: false,
             buttonStyle: false,
             query: '',
-            loading: true
+            loading: true,
+            about: false
+
         }
     }
 
@@ -53,6 +56,14 @@ class UsersPage extends React.Component {
             query: this.search.value
         })
     }
+    aboutPage = () => {
+        this.setState({
+            about: true
+        })
+    }
+
+
+
 
 
 
@@ -60,6 +71,9 @@ class UsersPage extends React.Component {
 
         if (this.state.loading === true)
             return <Loader />
+
+        if (this.state.about === true)
+            return <About />
 
         const buttonName = this.state.buttonStyle
             ? 'view_module'
@@ -93,7 +107,7 @@ class UsersPage extends React.Component {
                             />
                             <p>{this.state.query}</p>
                         </form>
-
+                        <li><a onClick={() => this.aboutPage()}> About</a></li>
                         <li><a><i className="material-icons" onClick={() => this.changeLayout()}>{buttonName}</i></a></li>
                         <li><a ><i className="material-icons" onClick={() => this.loadPageData()}>refresh</i></a></li>
                     </ul>
