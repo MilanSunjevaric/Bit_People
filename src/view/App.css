@@ -73,3 +73,8 @@ ul:not(.browser-default)>.pol{
   float: right;
   margin-right: 2em;
 }
+
+.Upload{
+  text-align: right;
+  font-weight: bold;
+}
